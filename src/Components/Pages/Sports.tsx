@@ -1,4 +1,3 @@
-import { BDD_URL } from "../App";
 import { useState, useEffect } from "react";
 
 type Articles = {
@@ -14,13 +13,13 @@ type Articles = {
       publishedAt: string;
       content: string;
     }
-const HomeNews = () => {
+const Sports=()=>{
     const [articles, setArticles] = useState<Articles[]>([]);
 
 
     useEffect(() => {
         // Realiza la llamada a la API de NewsAPI
-        fetch(`${BDD_URL}`)
+        fetch("https://newsapi.org/v2/everything?q=sports+argentina&pageSize=15&apiKey=a3aeae7b68034752a63e1703ded74468")
           .then((response) => response.json())
           .then((data) => setArticles(data.articles))
           .catch((error) => console.error('Error al obtener noticias:', error));
@@ -31,8 +30,8 @@ const HomeNews = () => {
 
     return (
         <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-semibold mb-4">Últimas Noticias</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <h1 className="text-3xl font-semibold mb-4">Sports</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 cursor-pointer">
         {articles.map((article, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md">
             <img src={article.urlToImage} alt={article.title} className="w-full h-48 object-cover rounded-t-lg" />
@@ -47,4 +46,4 @@ const HomeNews = () => {
     </div>
     );
 }
-export default HomeNews;
+export default Sports;
